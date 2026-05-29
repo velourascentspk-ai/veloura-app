@@ -66,7 +66,8 @@ function productCardHTML(p) {
   return `
   <div class="product-card" onclick="openDetail(${p.id})">
     <div class="card-img" style="background:${p.bgColor}">
-      <span class="card-emoji">${p.emoji}</span>
+      <img src="${p.image}" alt="${p.name}" class="card-photo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <span class="card-emoji-fallback" style="display:none">🌸</span>
       <button class="card-heart ${wished ? 'active' : ''}" onclick="toggleWish(${p.id}, event)" aria-label="Wishlist">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="${wished ? '#e74c3c' : 'none'}" stroke="${wished ? '#e74c3c' : 'currentColor'}" stroke-width="2">
           <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
@@ -134,7 +135,20 @@ function openDetail(id) {
   detailQty = 1;
 
   document.getElementById('detail-img').style.background = p.bgColor;
-  document.getElementById('detail-emoji').textContent = p.emoji;
+  // Show real image in detail view
+  let detailImgEl = document.getElementById('detail-product-img');
+  if (!detailImgEl) {
+    detailImgEl = document.createElement('img');
+    detailImgEl.id = 'detail-product-img';
+    detailImgEl.className = 'detail-photo';
+    const emojiEl = document.getElementById('detail-emoji');
+    emojiEl.parentNode.insertBefore(detailImgEl, emojiEl);
+    emojiEl.style.display = 'none';
+  }
+  detailImgEl.src = p.image;
+  detailImgEl.alt = p.name;
+  detailImgEl.style.display = 'block';
+  document.getElementById('detail-emoji').style.display = 'none';
   document.getElementById('detail-cat').textContent = p.cat;
   document.getElementById('detail-name').textContent = p.name;
   document.getElementById('detail-price').textContent = '₨' + p.price.toLocaleString();
@@ -196,7 +210,9 @@ function renderCart() {
   }
   listEl.innerHTML = items.map(item => `
     <div class="cart-item">
-      <div class="cart-thumb" style="background:${item.bgColor}">${item.emoji}</div>
+      <div class="cart-thumb" style="background:${item.bgColor}">
+        <img src="${item.image}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;" onerror="this.style.display='none'" />
+      </div>
       <div class="cart-info">
         <p class="cart-name">${item.name}</p>
         <p class="cart-unit">₨${item.price.toLocaleString()} each</p>

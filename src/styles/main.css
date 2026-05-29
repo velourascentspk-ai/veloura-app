@@ -178,10 +178,15 @@ input { font-family: inherit; }
 }
 .product-card:active { transform: scale(0.97); }
 .card-img {
-  height: 130px; display: flex; align-items: center; justify-content: center;
-  position: relative;
+  height: 150px; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
 }
-.card-emoji { font-size: 54px; }
+.card-photo {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.3s;
+}
+.product-card:active .card-photo { transform: scale(1.03); }
+.card-emoji-fallback { font-size: 54px; display: none; }
 .card-heart {
   position: absolute; top: 8px; right: 8px;
   background: rgba(255,255,255,0.9); border: none; border-radius: 50%;
@@ -247,6 +252,7 @@ input { font-family: inherit; }
   position: relative;
 }
 .detail-emoji { font-size: 100px; }
+.detail-photo { width: 100%; height: 100%; object-fit: cover; }
 .detail-body { background: #fff; border-radius: 24px 24px 0 0; margin-top: -20px; padding: 24px 20px 100px; }
 .detail-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px; }
 .detail-cat { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #d4af37; margin-bottom: 4px; }

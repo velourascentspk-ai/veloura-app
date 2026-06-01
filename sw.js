@@ -1,10 +1,13 @@
-const CACHE = 'veloura-v1';
-const FILES = ['/', '/index.html', '/src/styles/main.css', '/src/app.js', '/src/data/products.js'];
-
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)));
+  e.waitUntil(
+    caches.open('veloura-v1').then(cache =>
+      cache.addAll(['/', '/index.html'])
+    )
+  );
 });
 
 self.addEventListener('fetch', e => {
-  e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
+  e.respondWith(
+    caches.match(e.request).then(r => r || fetch(e.request))
+  );
 });

@@ -1,27 +1,22 @@
 {
   "name": "Veloura Scents",
   "short_name": "Veloura",
-  "description": "Luxury fragrances crafted to leave a lasting impression.",
-  "start_url": "/",
+  "description": "Luxury fragrances crafted to leave a lasting impression",
+  "start_url": "/veloura-app/",
   "display": "standalone",
-  "orientation": "portrait",
   "background_color": "#0f0f1a",
   "theme_color": "#0f0f1a",
-  "lang": "en",
-  "scope": "/",
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "https://velourascentspk-ai.github.io/icon-192.png",
+      "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
-      "src": "https://velourascentspk-ai.github.io/icon-512.png",
+      "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     }
-  ],
-  "categories": ["shopping", "lifestyle"]
+  ]
 }
